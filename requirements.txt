@@ -21,8 +21,6 @@ pyasn1==0.1.9
 pylint==1.6.4
 python-dateutil==2.6.0
 PyYAML==3.12
-## FIXME: could not find svn URL in dependency_links for this package:
-RBTools===0.5Amazon1.dev-r0
 requests==2.10.0
 rsa==3.4.2
 s3transfer==0.1.10
