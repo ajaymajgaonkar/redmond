@@ -3,12 +3,13 @@ from flask import render_template
 #from models import User
 from forms import SignupForm, ContactForm
 from flask_mongoalchemy import MongoAlchemy
+import os
 
 app = Flask(__name__)
 app.secret_key = "developmentkey"
 
 app.config['MONGOALCHEMY_DATABASE'] = 'library'
-app.config['MONGOALCHEMY_CONNECTION_STRING'] = "mongodb://admin:admin123@ds155718.mlab.com:55718/library"
+app.config['MONGOALCHEMY_CONNECTION_STRING'] = os.environ.get('MONGODB_URI')
 db = MongoAlchemy(app)
 
 class User(db.Document):
