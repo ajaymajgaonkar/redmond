@@ -7,6 +7,7 @@ colorama==0.3.7
 configparser==3.5.0
 docutils==0.13.1
 Flask==0.12
+Flask-WTF==0.13.1
 futures==3.0.5
 isort==4.2.5
 itsdangerous==0.24
@@ -19,6 +20,7 @@ mccabe==0.5.3
 psutil==3.2.0
 pyasn1==0.1.9
 pylint==1.6.4
+pymongo==3.4.0
 python-dateutil==2.6.0
 PyYAML==3.12
 requests==2.10.0
@@ -27,5 +29,7 @@ s3transfer==0.1.10
 simplejson==3.8.2
 six==1.10.0
 urllib2-kerberos==0.1.6
+virtualenv==15.1.0
 Werkzeug==0.11.15
 wrapt==1.10.8
+WTForms==2.1

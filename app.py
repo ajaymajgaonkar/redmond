@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, redirect, url_for
 from flask import render_template
 from models import User
-from forms import SignupForm
+from forms import SignupForm, ContactForm
 
 
 app = Flask(__name__)
@@ -22,7 +22,16 @@ def signup():
 	elif request.method == "GET":
 		return render_template("Signup.html", form=form)
 
-
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+	form = ContactForm()
+	if request.method == "POST":
+		if form.validate() == False:
+			return render_template("Contact.html", form=form)
+		else:
+			redirect(url_for('index'))
+	elif request.method == "GET":
+		return render_template("Contact.html", form=form)
 
 if __name__=="__main__":
 	app.run(debug=True)
