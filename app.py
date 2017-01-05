@@ -1,11 +1,21 @@
 from flask import Flask, jsonify, request, redirect, url_for
 from flask import render_template
-from models import User
+#from models import User
 from forms import SignupForm, ContactForm
-
+from flask_mongoalchemy import MongoAlchemy
 
 app = Flask(__name__)
 app.secret_key = "developmentkey"
+
+app.config['MONGOALCHEMY_DATABASE'] = 'library'
+app.config['MONGOALCHEMY_CONNECTION_STRING'] = "mongodb://admin:admin123@ds155718.mlab.com:55718/library"
+db = MongoAlchemy(app)
+
+class User(db.Document):
+	first_name = db.StringField()
+	last_name = db.StringField()
+	email = db.StringField()
+	password = db.StringField()
 
 @app.route("/")
 def index():
@@ -18,7 +28,9 @@ def signup():
 		if form.validate() == False:
 			return render_template("Signup.html", form=form)
 		else:
-			redirect(url_for('index'))
+			user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=form.password.data)
+			user.save()
+			return redirect(url_for('index'))
 	elif request.method == "GET":
 		return render_template("Signup.html", form=form)
 
