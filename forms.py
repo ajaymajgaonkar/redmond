@@ -11,13 +11,15 @@ class SignupForm(FlaskForm):
     password = PasswordField("Password", validators=[Required("Password is required")])
     submit = SubmitField("Sign Up")
 
+
 class ContactForm(FlaskForm):
     name = StringField("Name", validators=[Required("Please specify your name")])
-    email =  StringField("Email", validators=[Required("Email is required"), Email("Please enter valid email address")])
+    email = StringField("Email", validators=[Required("Email is required"), Email("Please enter valid email address")])
     message = TextAreaField("Message", validators=[Required("Please write some message")])
     submit = SubmitField("Send")
 
+
 class LoginForm(FlaskForm):
-    email =  StringField("Email", validators=[Required("Email is required"), Email("Please enter valid email address")])
+    email = StringField("Email", validators=[Required("Email is required"), Email("Please enter valid email address")])
     password = PasswordField("Password", validators=[Required("Password is required")])
     submit = SubmitField("Login")
