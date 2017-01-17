@@ -84,6 +84,7 @@ def todo():
             if session['username'] != '':
                 item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
                 item.save()
+                items.append(item)
                 return render_template("Todo.html", form=form, items=items)
             else:
                 return redirect(url_for('login'))
