@@ -4,7 +4,6 @@ from flask import render_template
 from forms import SignupForm, ContactForm, LoginForm, TodoForm
 from flask_mongoalchemy import MongoAlchemy
 import os
-import time
 from datetime import datetime
 
 app = Flask(__name__)
@@ -82,7 +81,7 @@ def todo():
             return render_template("Todo.html", error='Please fix errors and try again', form=form)
         else:
             if session['username'] != '':
-                item = Item(title=form.title.data, created_date = datetime.strptime(time.localtime()), created_by = session['username'])
+                item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
                 item.save()
                 return render_template("Todo.html", form=form)
             else:
