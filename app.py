@@ -93,7 +93,7 @@ def todo():
 
 @app.route("/logout")
 def logout():
-    session.pop('username', none)
+    session.pop('username', None)
     return render_template("Index.html")
 
 
