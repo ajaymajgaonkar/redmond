@@ -25,5 +25,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class TodoForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired("Email is required"), Email("Title cannot be left empty")])    
+    title = StringField("Title", validators=[DataRequired("Title is required")])    
     submit = SubmitField("Add")
