@@ -84,7 +84,7 @@ def todo():
                 item = Item(title=form.title.data, created_date = time.localtime(), created_by = session['Username'])
                 item.save()
                 return render_template("Todo.html", form=form)
-    elif request.method = "GET":
+    elif request.method == "GET":
         items = Item.query.filter(Item.created_by == session['Username']).all()
         render_template("Todo.html", items=items)
 
