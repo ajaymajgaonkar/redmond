@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "developmentkey"
 
 app.config['MONGOALCHEMY_DATABASE'] = 'library'
-app.config['MONGOALCHEMY_CONNECTION_STRING'] = "mongodb://admin:admin123@ds155718.mlab.com:55718/library"#os.environ.get('MONGODB_URI')
+app.config['MONGOALCHEMY_CONNECTION_STRING'] = os.environ.get('MONGODB_URI')
 db = MongoAlchemy(app)
 
 
