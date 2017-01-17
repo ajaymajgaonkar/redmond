@@ -1,9 +1,10 @@
 from flask import Flask, jsonify, request, redirect, url_for, session
 from flask import render_template
 # from models import User
-from forms import SignupForm, ContactForm, LoginForm
+from forms import SignupForm, ContactForm, LoginForm, TodoForm
 from flask_mongoalchemy import MongoAlchemy
 import os
+import time
 
 app = Flask(__name__)
 app.secret_key = "developmentkey"
@@ -19,6 +20,10 @@ class User(db.Document):
     email = db.StringField()
     password = db.StringField()
 
+class Item(db.Document):
+    title = db.StringField()
+    created_date = db.DateField()
+    created_by = db.StringField()
 
 @app.route("/")
 def index():
@@ -67,6 +72,21 @@ def login():
                     return render_template("Index.html")
             return render_template("Login.html", error='Login failed', form=form)
     return render_template("Login.html", form=form)
+
+@app.route("/todo", methods=["GET", "POST"])
+def todo():
+    form = TodoForm()
+    if request.method == "POST":
+        if form.validate() == False:
+            return render_template("Todo.html", error='Please fix errors and try again', form=form)
+        else:
+            if session['Username'] == '':
+                item = Item(title=form.title.data, created_date = time.localtime(), created_by = session['Username'])
+                item.save()
+                return render_template("Todo.html", form=form)
+    elif request.method = "GET":
+        items = Item.query.filter(Item.created_by == session['Username']).all()
+        render_template("Todo.html", items=items)
 
 
 @app.route("/logout")

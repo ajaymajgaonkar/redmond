@@ -23,3 +23,7 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired("Email is required"), Email("Please enter valid email address")])
     password = PasswordField("Password", validators=[DataRequired("Password is required")])
     submit = SubmitField("Login")
+
+class TodoForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired("Email is required"), Email("Title cannot be left empty")])    
+    submit = SubmitField("Add")
