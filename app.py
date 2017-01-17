@@ -80,13 +80,16 @@ def todo():
         if form.validate() == False:
             return render_template("Todo.html", error='Please fix errors and try again', form=form)
         else:
-            if session['Username'] == '':
-                item = Item(title=form.title.data, created_date = time.localtime(), created_by = session['Username'])
+            if session['username'] == '':
+                item = Item(title=form.title.data, created_date = time.localtime(), created_by = session['username'])
                 item.save()
                 return render_template("Todo.html", form=form)
     elif request.method == "GET":
-        items = Item.query.filter(Item.created_by == session['Username']).all()
-        render_template("Todo.html", items=items)
+        items = Item.query.filter(Item.created_by == session['username']).all()
+        if (len(items) > 0):
+            render_template("Todo.html", items=items)
+        else:
+
 
 
 @app.route("/logout")
