@@ -76,20 +76,20 @@ def login():
 @app.route("/todo", methods=["GET", "POST"])
 def todo():
     form = TodoForm()
-    items = Item.query.filter(Item.created_by == session['username']).all()
-    if request.method == "POST":
-        if form.validate() == False:
-            return render_template("Todo.html", error='Please fix errors and try again', form=form, items=items)
-        else:
-            if 'username' in session:
+    if 'username' in session:
+        items = Item.query.filter(Item.created_by == session['username']).all()
+        if request.method == "POST":
+            if form.validate() == False:
+                return render_template("Todo.html", error='Please fix errors and try again', form=form, items=items)
+            else:
                 item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
                 item.save()
                 items.append(item)
-                return render_template("Todo.html", form=form, items=items)
-            else:
-                return redirect(url_for('login'))
-    elif request.method == "GET":                
-        return render_template("Todo.html", items=items, form=form)
+                return render_template("Todo.html", form=form, items=items)                
+        elif request.method == "GET":                
+            return render_template("Todo.html", items=items, form=form)
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/logout")
 def logout():
