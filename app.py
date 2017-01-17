@@ -22,7 +22,7 @@ class User(db.Document):
 
 class Item(db.Document):
     title = db.StringField()
-    created_date = db.DateField()
+    created_date = db.DateTimeField()
     created_by = db.StringField()
 
 @app.route("/")
