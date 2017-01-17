@@ -85,12 +85,8 @@ def todo():
                 item.save()
                 return render_template("Todo.html", form=form)
     elif request.method == "GET":
-        items = Item.query.filter(Item.created_by == session['username']).all()
-        if (len(items) > 0):
-            render_template("Todo.html", items=items)
-        else:
-
-
+        items = Item.query.filter(Item.created_by == session['username']).all()        
+        render_template("Todo.html", items=items)
 
 @app.route("/logout")
 def logout():
