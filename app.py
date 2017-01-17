@@ -81,7 +81,7 @@ def todo():
         if form.validate() == False:
             return render_template("Todo.html", error='Please fix errors and try again', form=form, items=items)
         else:
-            if session['username'] != '':
+            if 'username' in session:
                 item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
                 item.save()
                 items.append(item)
@@ -93,7 +93,7 @@ def todo():
 
 @app.route("/logout")
 def logout():
-    session['username'] = ''
+    session.pop('username', none)
     return render_template("Index.html")
 
 
