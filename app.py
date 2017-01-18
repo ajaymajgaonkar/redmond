@@ -91,6 +91,10 @@ def todo():
     else:
         return redirect(url_for('login'))
 
+@app.route("/deleteItem", methods=["POST"])
+def deleteItem():
+    return "Not implemented"
+
 @app.route("/logout")
 def logout():
     session.pop('username', None)
