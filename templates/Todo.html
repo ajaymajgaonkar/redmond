@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="page-header">
-	<h1>Todo</h1>
 </div>
 {% if error %}
 <div class="alert alert-dismissible alert-warning">
@@ -15,14 +14,16 @@
     <div class="panel-body">
         <form method="POST" action="/todo" class="form-horizontal">
             {{ form.hidden_tag() }}
-
-            <div class="form-group">
+            <fieldset>
+                <legend>Add a Todo</legend>
+                <div class="form-group">
                 {{ form.title.label(class="col-lg-2 control-label") }}
-                {{ form.title }}
-            </div>
-            
-            {{ form.submit(class="btn btn-primary") }}
-
+                    <div class="col-lg-8">
+                {{ form.title(class="form-control") }}
+                    </div>
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </fieldset>
         </form>
     </div>
 </div>

@@ -34,7 +34,7 @@ def signup():
     form = SignupForm()
     if request.method == "POST":
         if form.validate() == False:
-            return render_template("Signup.html", form=form)
+            return render_template("Signup.html", form=form, error='All fields are required')
         else:
             user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data,
                         password=form.password.data)
@@ -84,7 +84,7 @@ def todo():
                 item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
                 item.save()
                 items.append(item)
-                return render_template("Todo.html", form=form, items=items)                
+                return render_template("Todo.html", form=form, items=items)
         elif request.method == "GET":                
             return render_template("Todo.html", items=items, form=form)
     else:
