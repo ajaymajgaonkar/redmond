@@ -10,9 +10,8 @@ app = Flask(__name__)
 app.secret_key = "developmentkey"
 
 app.config['MONGOALCHEMY_DATABASE'] = 'library'
-app.config['MONGOALCHEMY_CONNECTION_STRING'] = os.environ.get('MONGODB_URI')
+app.config['MONGOALCHEMY_CONNECTION_STRING'] = "mongodb://admin:admin123@ds155718.mlab.com:55718/library"#os.environ.get('MONGODB_URI')
 db = MongoAlchemy(app)
-
 
 class User(db.Document):
     first_name = db.StringField()
@@ -93,7 +92,10 @@ def todo():
 
 @app.route("/deleteItem", methods=["POST"])
 def deleteItem():
-    return "Not implemented"
+    item_id = request.form['data']
+    item = Item.query.filter(Item.mongo_id == item_id).first()
+    item.remove()
+    return redirect('todo')
 
 @app.route("/logout")
 def logout():
