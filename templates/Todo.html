@@ -16,10 +16,12 @@
             {{ form.hidden_tag() }}
             <fieldset>
                 <legend>Add a Todo</legend>
-                <div class="form-group">
-                {{ form.title.label(class="col-lg-2 control-label") }}
+                <div class="form-group">                
                     <div class="col-lg-8">
                 {{ form.title(class="form-control") }}
+                    </div>
+                    <div class="col-lg-2">
+                {{ form.status(class="form-control") }}
                     </div>
                     {{ form.submit(class="btn btn-primary") }}
                 </div>
@@ -34,7 +36,7 @@
             {% for item in items %}
                 <li class="list-group-item">                     
                     {{ item.title }}
-                    <input class="btn btn-primary btn-xs pull-right" id="{{ item.mongo_id }}" type="submit" value="Complete" onclick="deleteItem(this)"></input>
+                    <input class="btn btn-primary btn-xs pull-right" id="{{ item.mongo_id }}" type="submit" value="{{ item.status }}" onclick="deleteItem(this)"></input>
                 </li>  
             {% endfor %}
         </ul>

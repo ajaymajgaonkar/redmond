@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
 from wtforms import validators
 from wtforms.validators import Email, DataRequired
 
@@ -25,5 +25,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class TodoForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired("Title is required")])    
+    title = StringField("Title", validators=[DataRequired("Title is required")])
+    status = SelectField("Status", choices=[('Todo', 'Todo'), ('In Progress', 'In Progress'), ('Done', 'Done')])    
     submit = SubmitField("Add")

@@ -3,6 +3,7 @@ from flask import render_template
 # from models import User
 from forms import SignupForm, ContactForm, LoginForm, TodoForm
 from flask_mongoalchemy import MongoAlchemy
+from flask_mongoalchemy import fields
 import os
 from datetime import datetime
 
@@ -21,6 +22,7 @@ class User(db.Document):
 
 class Item(db.Document):
     title = db.StringField()
+    status = db.StringField()
     created_date = db.DateTimeField()
     created_by = db.StringField()
 
@@ -81,7 +83,11 @@ def todo():
             if form.validate() == False:
                 return render_template("Todo.html", error='Please fix errors and try again', form=form, items=items)
             else:
-                item = Item(title=form.title.data, created_date = datetime.utcnow(), created_by = session['username'])
+                item = Item(
+                    title=form.title.data, 
+                    status=form.status.data,
+                    created_date = datetime.utcnow(), 
+                    created_by = session['username'])
                 item.save()
                 items.append(item)
                 return render_template("Todo.html", form=form, items=items)
