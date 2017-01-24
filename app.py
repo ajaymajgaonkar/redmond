@@ -70,7 +70,7 @@ def login():
             if login_user:
                 if login_user.password == form.password.data:
                     session['username'] = form.email.data
-                    return render_template("Index.html")
+                    return redirect(url_for('todo'))
             return render_template("Login.html", error='Login failed', form=form)
     return render_template("Login.html", form=form)
 
